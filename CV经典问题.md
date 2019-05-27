@@ -33,13 +33,13 @@ normalizatiion，局部响应归一化层。因为relu响应结果是无界的�
 Relu，sigmoid，tanh三种激活函数的比较
 -------------------------------------
 
-![](media/8e71feae2ae4cef58fdfe6c2576ebce3.png)
+![avatar](media/8e71feae2ae4cef58fdfe6c2576ebce3.png)
 
 神经网络中的激活函数，目的就是引入非线性，不完全正确，可以理解成这个函数必须在连续函数空间稠密。
 
 Sigmoid的优点在于输出范围有限，数据在传输过程中不容易发散；输出范围是0\~1，可以作为输出层，输出表示概率；求导容易。但是饱和时梯度太小。
 
-![](media/e423ae8f909257f26334bfbe7acd9236.png)
+![avatar](media/e423ae8f909257f26334bfbe7acd9236.png)
 
 为何relu比sigmoid和tanh强？
 
@@ -70,7 +70,7 @@ Region proposal的作用是什么
 
 <https://www.zhihu.com/question/265345106>
 
-![](media/a83069f94855077a973769c15032adfd.png)
+![avatar](media/a83069f94855077a973769c15032adfd.png)
 
 Input Image经过CNN特征提取，首先来到Region Proposal网络。由Regio Proposal
 Network输出的Classification，这并不是判定物体在COCO数据集上对应的80类中哪一类，而是输出一个Binary的值p，可以理解为，人工设定一个threshold=0.5。RPN网络做的事情就是，如果一个Region的，则认为这个Region中可能是80个类别中的某一类，具体是哪一类现在还不清楚。到此为止，Network只需要把这些可能含有物体的区域选取出来就可以了，这些被选取出来的Region又叫做ROI
@@ -88,7 +88,7 @@ map上，所有可能包含80类物体的Region区域的信息，其他Region（
 如何理解多通道+多卷积核做卷积
 -----------------------------
 
-![](media/b53f89e0b6befa8138f613211775e983.png)
+![avatar](media/b53f89e0b6befa8138f613211775e983.png)
 
 输入图像layer
 m-1有4个通道，同时有2个卷积核w1和w2。对于卷积核w1，先在输入图像4个通道分别作卷积，再将4个通道结果加起来得到w1的卷积输出；卷积核w2类似。所以对于某个卷积层，无论输入图像有多少个通道，输出图像通道数总是等于卷积核数量！
@@ -198,7 +198,7 @@ score，每个GT只匹配一个bbox。如果此bbox不属于GT，则这个bbox�
 
 <https://blog.csdn.net/qq_29462849/article/details/81053135>
 
-![](media/198a163d4e3129aed52e7c21cf885252.png)
+![avatar](media/198a163d4e3129aed52e7c21cf885252.png)
 
 如果我们希望：被检索到的内容越多越好，这是追求“查全率”，即A/(A+C)，越大越好。
 
@@ -225,9 +225,9 @@ AUC越大，分类器分类效果越好。
 数据处理方法和性能度量（西瓜书）
 --------------------------------
 
-![](media/5d5959008b11bac090ae408066bbb2a5.png)
+![avatar](media/5d5959008b11bac090ae408066bbb2a5.png)
 
-![](media/b4f85f7b1187a59bc946d5a070b35d3c.png)
+![avatar](media/b4f85f7b1187a59bc946d5a070b35d3c.png)
 
 说一说常见的正则化手段，L1和L2正则化的不同
 ------------------------------------------
@@ -244,23 +244,23 @@ L1正则化、L2正则化、Elastic网络正则化、最大范数约束、Dropou
 
 L1正则化，
 
-![](media/bf2c985edb860b9564b2bca202f1f517.png)
+![avatar](media/bf2c985edb860b9564b2bca202f1f517.png)
 
 L2正则化，
 
-![](media/1b0e5349e1affb725785012f5910070d.png)
+![avatar](media/1b0e5349e1affb725785012f5910070d.png)
 
 Elastic网络正则化，
 
-![](media/96c8127a70e8d0b2086be0b0a5965215.png)
+![avatar](media/96c8127a70e8d0b2086be0b0a5965215.png)
 
 最大范数约束，
 
-![](media/a1c125a4a989e766acc6a5f274a8c517.png)
+![avatar](media/a1c125a4a989e766acc6a5f274a8c517.png)
 
 Dropout，
 
-![](media/117722e265775edab8cda3fdd03fe20c.png)
+![avatar](media/117722e265775edab8cda3fdd03fe20c.png)
 
 使用验证集，纯粹用于调超参，多次使用，验证集需要足够泛化性。
 
@@ -374,7 +374,6 @@ SVM原问题和对偶问题的关系
 决策树过拟合哪些办法，前后剪枝
 ------------------------------
 
-我说呢XGBoost用泰勒展开，优势在哪
 
 深度学习基础
 ============
