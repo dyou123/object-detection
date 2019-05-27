@@ -6,7 +6,8 @@ Markdown使用大全】
 ## CV经典问题
 ![avatar](media/AI.png)
 ## 人脸识别
-主要介绍MTCNN + FaceNet
+**主要介绍MTCNN + FaceNet**
+
 ## 基于深度学习的目标检测
 ### **R-CNN系列：**
 
