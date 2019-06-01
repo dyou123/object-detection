@@ -30,15 +30,27 @@ normalizatiion，局部响应归一化层。因为relu响应结果是无界的�
 
 <http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html>
 
-Relu，sigmoid，tanh三种激活函数的比较
+Relu，sigmoid，tanh，linear四种激活函数的比较
 -------------------------------------
 
 ![avatar](media/8e71feae2ae4cef58fdfe6c2576ebce3.png)
 
 神经网络中的激活函数，目的就是引入非线性，不完全正确，可以理解成这个函数必须在连续函数空间稠密。
 
-Sigmoid的优点在于输出范围有限，数据在传输过程中不容易发散；输出范围是0\~1，可以作为输出层，输出表示概率；求导容易。但是饱和时梯度太小。
+sigmoid：
 
+![avatar](media/sigmoid.png)
+
+relu：
+
+![avatar](media/relu.png)
+
+线性激活函数 linear 【输入的加权和再加上 bias。这个函数十分简单，但是功能也很有限。】
+
+![avatar](media/linear.png)
+
+
+Sigmoid的优点在于输出范围有限，数据在传输过程中不容易发散；输出范围是0\~1，可以作为输出层，输出表示概率；求导容易。但是饱和时梯度太小。
 ![avatar](media/e423ae8f909257f26334bfbe7acd9236.png)
 
 为何relu比sigmoid和tanh强？
@@ -48,6 +60,8 @@ Sigmoid的优点在于输出范围有限，数据在传输过程中不容易发�
 而且relu是单边的，更符合生物神经元的特征。
 
 Relu更容易优化，因为分段性质。
+
+
 
 如何理解anchor？
 ----------------
@@ -447,6 +461,16 @@ Momentum优化算法原理，作用
 
 1\*1卷积核的作用
 ----------------
+理解：
+![avatar](media/11conv.png)
+![avatar](media/11conv1.png)
+![avatar](media/11conv2.png)
+
+作用：
+1，降维、升维
+2，减少参数
+3，跨通道信息交互
+4，增加非线性特性
 
 卷积层和全连接层的区别
 ----------------------
