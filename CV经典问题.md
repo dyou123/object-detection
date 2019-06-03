@@ -4,6 +4,15 @@ CV方向
 介绍faster rcnn的流程以及损失函数，为什么这么设计损失函数
 ---------------------------------------------------------
 
+![avatar](media/3ecebe0df45885c75b5eff912ba52348.png)
+
+    图片输入经过conv得到特征图 -> 
+    生成anchors -> 
+    softmax分类器提取anchors -> 
+    bbox reg回归anchors -> 
+    Proposal -> 
+    softmax判定前景背景 + 对proposals进行bounding box regression 
+
 AlexNet在LeNet基础上的提升 
 ---------------------------
 
