@@ -16,21 +16,16 @@ CV方向
 AlexNet在LeNet基础上的提升 
 ---------------------------
 
-1，用relu代替sigmoid作为CNN的激活函数。在较深的网络时，成功解决sigmoid在网络较深情况下的梯度弥散问题。
+    1，用relu代替sigmoid作为CNN的激活函数。在较深的网络时，成功解决sigmoid在网络较深情况下的梯度弥散问题。
+    2，dropout随机忽略一部分神经元，避免过拟合（alexnet最后几个全连接层都用到）
+    3，以前CNN都是用平均池化，改进后用max pooling。避免平均池化的模糊化效果；步长比池化核尺寸小，输出有重叠和覆盖，提升了丰富性。
+    4，LRN层，对局部神经元中响应大的值变更大，增强泛化能力。
+    
+### LRN层
 
-2，dropout随机忽略一部分神经元，避免过拟合（alexnet最后几个全连接层都用到）
+local response normalization，局部响应归一化层。因为relu响应结果是无界的。需要归一化。默认across-channels。
 
-3，以前CNN都是用平均池化，改进后用max
-pooling。避免平均池化的模糊化效果；步长比池化核尺寸小，输出有重叠和覆盖，提升了丰富性。
-
-4，LRN层，对局部神经元中响应大的值变更大，增强泛化能力。
-
-LRN层。
-
-local response
-normalizatiion，局部响应归一化层。因为relu响应结果是无界的。需要归一化。默认across-channels。
-
-之后的BN：
+### 之后的BN
 
 更高的学习率，更快的训练过程；防止过拟合，移除或使用较小的dropout；取消LRN层。
 
