@@ -13,6 +13,17 @@ CV方向
     Proposal -> 
     softmax判定前景背景 + 对proposals进行bounding box regression 
 
+##dice系数和jacard系数
+
+**dice系数：**
+
+![avatar](media/dice.png)
+
+**jacard系数**
+
+![avatar](media/jacard.png)
+
+
 AlexNet在LeNet基础上的提升 
 ---------------------------
 
@@ -20,8 +31,7 @@ AlexNet在LeNet基础上的提升
 
 2，dropout随机忽略一部分神经元，避免过拟合（alexnet最后几个全连接层都用到）
 
-3，以前CNN都是用平均池化，改进后用max
-pooling。避免平均池化的模糊化效果；步长比池化核尺寸小，输出有重叠和覆盖，提升了丰富性。
+3，以前CNN都是用平均池化，改进后用max pooling。避免平均池化的模糊化效果；步长比池化核尺寸小，输出有重叠和覆盖，提升了丰富性。
 
 4，LRN层，对局部神经元中响应大的值变更大，增强泛化能力。
 
