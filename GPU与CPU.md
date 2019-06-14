@@ -1,6 +1,14 @@
+
+
 # GPU并行编程的运算架构
 
 多核CPU与GPU的计算网格：
+
+ALU指的是arithmetic logic unit，算术逻辑单元。CPU计算和GPU计算都是靠的ALU。
+
+GPU绝大部分的芯片面积是ALU，而且超大阵列排布，可以并行运算，所以浮点计算速度快。
+
+相比而言，CPU大部分面积要给控制单元和Cache，因为其要承担整个计算机的控制工作。
 
 ![avatar](media/cpugpu.png)
 
