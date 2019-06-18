@@ -1,22 +1,24 @@
 # object-detection
 
-【https://blog.csdn.net/witnessai1/article/details/52551362
-Markdown使用大全】
+### 目标检测
 
-## CV经典问题
-![avatar](media/AI.png)
-## 人脸识别
-**主要介绍MTCNN + FaceNet**
+>    **基于深度学习的目标检测算法**
+>
+>    **人脸识别**
+>
+>    **如何调参**
 
-## 基于深度学习的目标检测
-### **R-CNN系列：**
+### 医疗影像处理
 
-**RCNN—\>SPPNet—\>FastRCNN—\>FasterRCNN—\> R-FCN—\>RetinaNet—\>Mask RCNN**
+>    **医疗图像分割**
+>
+>    **我的论文**
 
-### **单次目标检测器：**
 
-**YOLOv1—\> SSD—\> v2—\> v3—\>MobileNet，M2Det**
+### CV知识学习
 
-## 如何调参
-
-**经典问题 + Detectron问题调参 + Face调参**
+>    **CV经典问题**
+>
+>    **传统机器学习方法**
+>
+>    **TensorFlow，PyTorch知识**
