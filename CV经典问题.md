@@ -455,11 +455,149 @@ L0，L1，L2正则化
 各个激活函数的优缺点
 --------------------
 
-目标检测领域的常见算法
-----------------------
-
 Batch normalization如何实现，作用
 ---------------------------------
+
+https://www.zhihu.com/question/38102762
+
+什么是BN
+
+批规范化处理。把数据分为若干组，按组来更新参数，一组中的数据共同决定了本次梯度的方向，下降时减少了随机性。另一方面因为批的样本数与整个数据集相比小了很多，计算量也下降了很多。
+
+![avatar](media/9ad70be49c408d464c71b8e9a006d141_hd.jpg)
+
+从某种意义上来说，gamma和beta代表的其实是输入数据分布的方差和偏移。对于没有BN的网络，这两个值与前一层网络带来的非线性性质有关，而经过变换后，就跟前面一层无关，变成了当前层的一个学习参数，这更加有利于优化并且不会降低网络的能力。
+
+对于CNN，BN的操作是在各个特征维度之间单独进行，也就是说各个通道是分别进行Batch Normalization操作的。如果输出的blob大小为(N,C,H,W)，那么在每一层normalization就是基于**N\*H\*W个数值进行求平均以及方差的操作**。
+
+![avatar](media/beb44145200caafe24fe88e7480e9730_hd.jpg)
+BN可以应用于网络中任意的activation set。是**为了防止“梯度弥散”**。关于梯度弥散，大家都知道一个简单的栗子，0.9的30次方为0.04。在BN中，是通过将activation规范为均值和方差一致的手段使得原本会减小的activation的scale变大。
+
+在神经网络训练时遇到收敛速度很慢，或梯度爆炸等无法训练的状况时可以尝试BN来解决。另外，在一般使用情况下也可以加入BN来加快训练速度，提高模型精度。
+
+对于前向传播网络：
+
+```python
+def batchnorm_forward(x, gamma, beta, bn_param):
+  """
+  Input:
+  - x: (N, D)维输入数据
+  - gamma: (D,)维尺度变化参数 
+  - beta: (D,)维尺度变化参数
+  - bn_param: Dictionary with the following keys:
+    - mode: 'train' 或者 'test'
+    - eps: 一般取1e-8~1e-4
+    - momentum: 计算均值、方差的更新参数
+    - running_mean: (D,)动态变化array存储训练集的均值
+    - running_var：(D,)动态变化array存储训练集的方差
+
+  Returns a tuple of:
+  - out: 输出y_i（N，D）维
+  - cache: 存储反向传播所需数据
+  """
+  mode = bn_param['mode']
+  eps = bn_param.get('eps', 1e-5)
+  momentum = bn_param.get('momentum', 0.9)
+
+  N, D = x.shape
+  # 动态变量，存储训练集的均值方差
+  running_mean = bn_param.get('running_mean', np.zeros(D, dtype=x.dtype))
+  running_var = bn_param.get('running_var', np.zeros(D, dtype=x.dtype))
+
+  out, cache = None, None
+  # TRAIN 对每个batch操作
+  if mode == 'train':
+    sample_mean = np.mean(x, axis = 0)
+    sample_var = np.var(x, axis = 0)
+    x_hat = (x - sample_mean) / np.sqrt(sample_var + eps)
+    out = gamma * x_hat + beta
+    cache = (x, gamma, beta, x_hat, sample_mean, sample_var, eps)
+    running_mean = momentum * running_mean + (1 - momentum) * sample_mean
+    running_var = momentum * running_var + (1 - momentum) * sample_var
+  # TEST：要用整个训练集的均值、方差
+  elif mode == 'test':
+    x_hat = (x - running_mean) / np.sqrt(running_var + eps)
+    out = gamma * x_hat + beta
+  else:
+    raise ValueError('Invalid forward batchnorm mode "%s"' % mode)
+
+  bn_param['running_mean'] = running_mean
+  bn_param['running_var'] = running_var
+
+  return out, cache
+```
+
+对于梯度反向传播：
+
+```python
+def batchnorm_backward(dout, cache):
+  """
+  Inputs:
+  - dout: 上一层的梯度，维度(N, D)，即 dL/dy
+  - cache: 所需的中间变量，来自于前向传播
+
+  Returns a tuple of:
+  - dx: (N, D)维的 dL/dx
+  - dgamma: (D,)维的dL/dgamma
+  - dbeta: (D,)维的dL/dbeta
+  """
+    x, gamma, beta, x_hat, sample_mean, sample_var, eps = cache
+  N = x.shape[0]
+
+  dgamma = np.sum(dout * x_hat, axis = 0)
+  dbeta = np.sum(dout, axis = 0)
+
+  dx_hat = dout * gamma
+  dsigma = -0.5 * np.sum(dx_hat * (x - sample_mean), axis=0) * np.power(sample_var + eps, -1.5)
+  dmu = -np.sum(dx_hat / np.sqrt(sample_var + eps), axis=0) - 2 * dsigma*np.sum(x-sample_mean, axis=0)/ N
+  dx = dx_hat /np.sqrt(sample_var + eps) + 2.0 * dsigma * (x - sample_mean) / N + dmu / N
+
+  return dx, dgamma, dbeta
+```
+
+**BN带来的好处。**
+
+(1) 减轻了对参数初始化的依赖，这是利于调参的朋友们的。
+
+(2) 训练更快，可以使用更高的学习率。
+
+(3) BN一定程度上增加了泛化能力，dropout等技术可以去掉。
+
+Batch Normalization调整了数据的分布，不考虑激活函数，它让每一层的输出归一化到了均值为0方差为1的分布，这保证了梯度的有效性。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Momentum优化算法原理，作用
 --------------------------
